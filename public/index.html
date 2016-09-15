@@ -1,0 +1,99 @@
+<meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="utf-8">
+    <title>IoT FireBase</title>
+    <style media="screen">
+      body {
+        font-family: Roboto, Arial, sans-serif;
+        background: #ECEFF1;
+        color: rgba(0,0,0,0.87);
+      }
+
+      a {
+        color: rgb(3,155,229);
+      }
+
+      #message {
+        max-width: 400px;
+        margin: 40px auto;
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2),0 1px 1px 0 rgba(0,0,0,0.14),0 2px 1px -1px rgba(0,0,0,0.12);
+        border-radius: 2px;
+        background: white;
+        padding: 16px 24px;
+      }
+
+      #message h1 {
+        font-size: 22px;
+        font-weight: 500;
+        text-align: center;
+        margin: 0 0 16px;
+      }
+
+      #message p {
+        font-weight: 300;
+        line-height: 150%;
+      }
+
+      #message ul {
+        list-style: none;
+        margin: 16px 0 0;
+        padding: 0;
+        text-align: center;
+      }
+
+      #message li button {
+        display: inline-block;
+        padding: 8px;
+        text-transform: uppercase;
+        text-decoration: none;
+        font-weight: 500;
+        background: rgb(3,155,229);
+        color: white;
+        border: 1px solid rgb(3,155,229);
+        border-radius: 3px;
+        font-size: 14px;
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="message">
+      <h1>FireBase IoT サンプル</h1>
+      <ul>
+        <li><button id="button" target="_blank">読込中</button></li>
+      </ul>
+    </div>
+  </body>
+</html>
+<script src="https://www.gstatic.com/firebasejs/3.3.2/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDdaI02eD1ruNAmJ6ZLvaBtJM3RxAquYGw",
+    authDomain: "iot-sample-2450c.firebaseapp.com",
+    databaseURL: "https://iot-sample-2450c.firebaseio.com",
+    storageBucket: "iot-sample-2450c.appspot.com",
+    messagingSenderId: "690742999473"
+  };
+  firebase.initializeApp(config);
+</script>
+
+<script>
+  var switchRef = firebase.database().ref("switch");
+  var buttonState = null;
+  var button = document.getElementById("button");
+
+  button.addEventListener('click', function(){
+    switchRef.set(!buttonState);
+  });
+
+  switchRef.on('value', function(sw) {
+    buttonState = sw.val();
+    if (buttonState) {
+      button.innerHTML = '点灯中';
+      button.style.background = "rgb(3,155,229)";
+    } else {
+      button.innerHTML = '消灯中';
+      button.style.background = "rgb(155,155,155)";
+    }
+  });
+</script>

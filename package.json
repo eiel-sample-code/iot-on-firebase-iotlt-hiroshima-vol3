@@ -1,0 +1,16 @@
+{
+  "name": "iot-on-firebase-in-iotlt-h-vol3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "firebase": "^3.4.0",
+    "johnny-five": "^0.10.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
